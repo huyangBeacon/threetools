@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../build/threetools.js"></script>
+    <script>
+    //console.log(TTs)
+    var {scene, camera} = TTs.initScene()
+    
+    TTs.loadObjModel('./models/GrandPiano/', 'piano').then((data) => {
+            pianoModel = data
+            scene.add(data)
+        })
+        //更新全景背景图，若初始无全景则创建全景
+        TTs.updata360Mesh('./img/023.jpg', scene)
+
+        //点击获取场景中模型、实体对象、点击位置坐标
+        TTs.clickMouseToSelectObj(camera, pianoModel.children, (data) => {
+            //创建poi
+                TTs.createPoi(data.point, './img/mozart.jpg');
+                console.log(data);
+            })
+
+    </script>
+</body>
+</html>
