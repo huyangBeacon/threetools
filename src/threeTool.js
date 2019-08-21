@@ -140,7 +140,7 @@ var TTs = {
   },
 
   // 生成poi
-  createPoi(position, imgSrc) {
+  createPoi(position, imgSrc,message) {
     let screen = position.clone().project(camera)
     let halfWidth = window.innerWidth / 2
     let halfHeight = window.innerHeight / 2
@@ -152,7 +152,7 @@ var TTs = {
     divContainer.style.display = 'block'
     divContainer.style.position = 'fixed'
     divContainer.style.backgroundColor = '0x477674'
-    divContainer.innerHTML = '莫扎特'; // poi文字信息
+    divContainer.innerHTML = message; // poi文字信息
 
     document.body.appendChild(divContainer)
     divContainer.style.top = screenPos.x - 80 + 'px'
@@ -213,10 +213,11 @@ var TTs = {
     let renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
+
     if (option === undefined || option.glcId === undefined) {
       document.body.appendChild(renderer.domElement)
     }else {
-      document.getElementById(glcId).appendChild(renderer.domElement)
+      document.getElementById(option.glcId).appendChild(renderer.domElement)
     }
 
     animate()

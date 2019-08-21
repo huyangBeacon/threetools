@@ -7,24 +7,26 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="glContainer"></div>
     <script src="../build/threetools.js"></script>
     <script>
     //console.log(TTs)
-    var {scene, camera} = TTs.initScene()
-    
+    var {scene, camera} = TTs.initScene({glcId:'glContainer'})
+    var pianoModel;
     TTs.loadObjModel('./models/GrandPiano/', 'piano').then((data) => {
             pianoModel = data
             scene.add(data)
+            onLoad()//模型加载完成后开始的操作
         })
         //更新全景背景图，若初始无全景则创建全景
-        TTs.updata360Mesh('./img/023.jpg', scene)
+        TTs.updata360Mesh('./img/goldbeach.jpg', scene)
 
         //点击获取场景中模型、实体对象、点击位置坐标
-        TTs.clickMouseToSelectObj(camera, pianoModel.children, (data) => {
+        function onLoad(){TTs.clickMouseToSelectObj(camera, pianoModel.children, (data) => {
             //创建poi
-                TTs.createPoi(data.point, './img/mozart.jpg');
+                TTs.createPoi(data.point, './img/mozart.jpg','莫扎特');
                 console.log(data);
-            })
+            })}
 
     </script>
 </body>
