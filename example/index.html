@@ -25,12 +25,12 @@
         function onLoad(){TTs.clickMouseToSelectObj(camera, pianoModel.children, (data) => {
             
             //创建poi
-            let poiOption = { position:position,//poi在场景位置坐标
-                              imgSrc:imgSrc, //poi背景图片，可选
-                              message: message,//poi信息文字
-                              toggleRemove: toggleRemove //poi点击后是否删除
+            let poiOption = { position: data.point,//poi在场景位置坐标
+                              imgSrc: './img/mozart.jpg', //poi背景图片，可选
+                              message: '莫扎特',//poi信息文字
+                              toggleRemove: true //poi点击后是否删除
                             }
-                TTs.createPoi(data.point, './img/mozart.jpg','莫扎特',true);
+                TTs.createPoi(poiOption);
                 console.log(data);
             })}
     </script>
