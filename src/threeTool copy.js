@@ -126,7 +126,7 @@ var TTs = {
   // 生成poi
 
   createPoi(poiOption) {
-    const { position, imgSrc, message, toggleRemove } = poiOption
+    const { position, imgSrc, message, toggleRemove } = poiOption;
     let screen = position.clone().project(camera)
     let halfWidth = window.innerWidth / 2
     let halfHeight = window.innerHeight / 2
@@ -209,26 +209,12 @@ var TTs = {
     let renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(window.innerWidth, window.innerHeight)
-    let mouseEventControler = {
-      mouseDown: undefined,
-      mouseMove: undefined,
-      mouseUp: undefined
-    }
-    let glCanvas = renderer.domElement
+
     if (option === undefined || option.glcId === undefined) {
-      document.body.appendChild(glCanvas)
+      document.body.appendChild(renderer.domElement)
     }else {
-      document.getElementById(option.glcId).appendChild(glCanvas)
+      document.getElementById(option.glcId).appendChild(renderer.domElement)
     }
-    glCanvas.addEventListener('mousedown', (event) => {
-      mouseEventControler.mouseDown = event
-    })
-    glCanvas.addEventListener('mousemove', (event) => {
-      mouseEventControler.mouseMove = event
-    })
-    glCanvas.addEventListener('mouseup', (event) => {
-      mouseEventControler.mouseUp = event
-    })
 
     animate()
 
@@ -237,8 +223,6 @@ var TTs = {
       // 监听语法：scene.addEventListener('preRender', () => {/**callBack to do something */})
 
       scene.dispatchEvent({ type: 'preRender', message: 'preUpdata' })
-      
-      scene.dispatchEvent({ type: 'eventControl', message: mouseEventControler })
 
       requestAnimationFrame(animate)
 
