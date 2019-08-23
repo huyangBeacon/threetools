@@ -104,7 +104,6 @@ var TTs = {
 
     function onDocumentMouseDown (event) {
       if (2 === event.button) {
-        document.removeEventListener('mousemove', onDocumentMouseMove, false)
         document.removeEventListener('mousedown', onDocumentMouseDown, false)
         return
       }
@@ -237,7 +236,7 @@ var TTs = {
       // 监听语法：scene.addEventListener('preRender', () => {/**callBack to do something */})
 
       scene.dispatchEvent({ type: 'preRender', message: 'preUpdata' })
-      
+
       scene.dispatchEvent({ type: 'eventControl', message: mouseEventControler })
 
       requestAnimationFrame(animate)
@@ -250,6 +249,61 @@ var TTs = {
       scene: scene,
       camera: camera
     }
+  },
+  createWordCanvasTexture(option = {
+      txt: '莫扎特', // 文字文本
+      size: '23', // 文字大小尺寸
+      color: 'red' // 文字颜色
+    }) {
+    const {txt, size, color} = option
+    var canvas = document.createElement('canvas')
+    var ctx = canvas.getContext('2d')
+    let font = 'Normal ' + size + 'px Arial'
+    console.log(font)
+    ctx.font = 'Normal ' + size + 'px Arial'
+    ctx.lineWidth = 1
+    ctx.fillStyle = color // 字体颜色
+    ctx.textAlign = 'left'
+    ctx.textBaseline = 'center'
+    ctx.fillText(txt, 100, 100)
+    var texture = new THREE.CanvasTexture(canvas)
+    // mesh.material.map = texture
+    return texture
+  },
+  drawWord(option = {
+      scene: scene,
+      word: '迅维', // 绘制的文字文本
+      color: 'red', // 字体颜色
+      size: 23, // 字体大小
+      position: {x: 0,y: 0,z: 0}, // 字体在场景中位置
+      rotation: {x: 0,y: 0,z: 0} // 旋转角度
+    }) {
+
+
+    const {scene, word, color, size, position, rotation} = option
+    let material = new THREE.MeshBasicMaterial()
+    material.map = this.createWordCanvasTexture(
+      word, size, color)
+
+    let mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(200, 4000, 8000), material)
+    mesh.name = 'wordMesh'
+    scene.add(mesh)
+
+    // 在透明通道过滤出透明度大于0.5d的像素
+    //mesh.material.alphaTest = 0
+    mesh.material.needsUpdate = true
+    mesh.scale.set(500, 500, 500)
+
+    mesh.position.set(position.x,
+      position.y,
+      position.z
+    )
+
+    mesh.rotation.set(rotation.x, rotation.y, rotation.z)
+    return mesh
+  },
+  drawFace(){
+    
   }
 }
 window.TTs = TTs
