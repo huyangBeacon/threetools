@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <div id="glContainer"></div>
     <script src="../build/threetools.js"></script>
     <script>
-    //console.log(TTs)
-    var { scene, camera } = TTs.initScene({glcId:'glContainer'})
-    var pianoModel;
-    TTs.loadObjModel('./models/GrandPiano/', 'piano').then((data) => {
+        //console.log(TTs)
+        var { scene, camera } = TTs.initScene({ glcId: 'glContainer' })
+        var pianoModel;
+        TTs.loadObjModel('./models/GrandPiano/', 'piano').then((data) => {
             pianoModel = data
             scene.add(data)
             onLoad()//模型加载完成后开始的操作
@@ -22,19 +24,51 @@
         TTs.updata360Mesh('./img/goldbeach.jpg', scene)
 
         //点击获取场景中模型、实体对象、点击位置坐标
-        function onLoad(){TTs.clickMouseToSelectObj(camera, pianoModel.children, (data) => {
-            
-            //创建poi
-            let poiOption = { position: data.point,//poi在场景位置坐标
-                              imgSrc: './img/mozart.jpg', //poi背景图片，可选
-                              message: '莫扎特',//poi信息文字
-                              toggleRemove: true //poi点击后是否删除
-                            }
+        function onLoad() {
+            TTs.clickMouseToSelectObj(camera, pianoModel.children, (data) => {
 
-                            
-                TTs.createPoi(poiOption);
+                // //创建poi
+                // let poiOption = {
+                //     position: data.point,//poi在场景位置坐标
+                //     imgSrc: './img/mozart.jpg', //poi背景图片，可选
+                //     message: '莫扎特',//poi信息文字
+                //     toggleRemove: true //poi点击后是否删除
+                // }
+                // TTs.createPoi(poiOption);
+                
+                ////绘制文字
+                // let wordOption = {
+                //     scene: scene, // 三维场景容器
+                //     word: '莫扎特特特', // 绘制的文字文本
+                //     color: 'red', // 字体颜色
+                //     size: 903, // 字体大小
+                //     position: data.point, // 字体在场景中位置
+                //     rotation: { x: 0, y: 0, z: 0 } // 旋转角度
+                // }
+                // TTs.drawWord(wordOption);
+                
+
+                //绘制线
+                TTs.drawLine(option = {
+                    scene: scene,
+                    nextPoint: data.point,
+                    color: 'red'
+                })
+                
+                
+                //绘制面
+                // TTs.drawFace(option = {
+                //     scene: scene,
+                //     nextPoint: data.point, // 打点数组
+                //     color: 'red', // 面的颜色
+                //     opcity: 0.5, // 面的透明度
+                //     bounding: true // 是否绘制边线
+                // })
+
                 console.log(data);
-            })}
+            })
+        }
     </script>
 </body>
+
 </html>
