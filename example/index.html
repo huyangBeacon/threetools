@@ -11,8 +11,7 @@
 <body>
     <div id="glContainer"></div>
     <script src="../build/threetools.js"></script>
-    <script>
-        //console.log(TTs)
+    <script  >
         var { scene, camera } = TTs.initScene({ glcId: 'glContainer' })
         var pianoModel;
         TTs.loadObjModel('./models/GrandPiano/', 'piano').then((data) => {
@@ -37,23 +36,23 @@
                 // TTs.createPoi(poiOption);
                 
                 ////绘制文字
-                // let wordOption = {
-                //     scene: scene, // 三维场景容器
-                //     word: '莫扎特特特', // 绘制的文字文本
-                //     color: 'red', // 字体颜色
-                //     size: 903, // 字体大小
-                //     position: data.point, // 字体在场景中位置
-                //     rotation: { x: 0, y: 0, z: 0 } // 旋转角度
-                // }
-                // TTs.drawWord(wordOption);
+                let wordOption = {
+                    scene: scene, // 三维场景容器
+                    word: '莫扎特特特', // 绘制的文字文本
+                    color: 'red', // 字体颜色
+                    size: 903, // 字体大小
+                    position: data.point, // 字体在场景中位置
+                    rotation: { x: 0, y: 0, z: 0 } // 旋转角度
+                }
+                TTs.drawWord(wordOption);
                 
 
                 //绘制线
-                TTs.drawLine(option = {
-                    scene: scene,
-                    nextPoint: data.point,
-                    color: 'red'
-                })
+                // TTs.drawLine(option = {
+                //     scene: scene,
+                //     nextPoint: data.point,
+                //     color: 'red'
+                // })
                 
                 
                 //绘制面
