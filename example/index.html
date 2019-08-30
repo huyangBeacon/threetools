@@ -26,16 +26,16 @@
         function onLoad() {
             TTs.clickMouseToSelectObj(camera, pianoModel.children, (data) => {
 
-                // //创建poi
-                // let poiOption = {
-                //     position: data.point,//poi在场景位置坐标
-                //     imgSrc: './img/mozart.jpg', //poi背景图片，可选
-                //     message: '莫扎特',//poi信息文字
-                //     toggleRemove: true //poi点击后是否删除
-                // }
-                // TTs.createPoi(poiOption);
+                //创建poi
+                let poiOption = {
+                    position: data.point,//poi在场景位置坐标
+                    imgSrc: './img/mozart.jpg', //poi背景图片，可选
+                    message: '莫扎特',//poi信息文字
+                    toggleRemove: true //poi点击后是否删除
+                }
+                TTs.createPoi(poiOption);
                 
-                ////绘制文字
+                //绘制文字
                 let wordOption = {
                     scene: scene, // 三维场景容器
                     word: '莫扎特特特', // 绘制的文字文本
@@ -53,8 +53,7 @@
                 //     nextPoint: data.point,
                 //     color: 'red'
                 // })
-                
-                
+
                 //绘制面
                 // TTs.drawFace(option = {
                 //     scene: scene,
